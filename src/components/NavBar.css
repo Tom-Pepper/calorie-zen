@@ -19,3 +19,19 @@
     font-weight: bold;
     font-size: 26px;
 }
+
+@media screen and (max-width: 950px) {
+    .menu {
+        position: static;
+        top: 0;
+        left: 0;
+        transform: translate(0,0);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu__link {
+        margin-right: 0;
+    }
+}
