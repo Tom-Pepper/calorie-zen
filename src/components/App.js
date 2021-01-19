@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import './AppContainer.css';
-import AppContainer from './AppContainer.js';
 import Header from './Header';
+import Diary from './Diary';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <AppContainer />
-    </>
+      <Diary />
+    </BrowserRouter>
   );
 }
 

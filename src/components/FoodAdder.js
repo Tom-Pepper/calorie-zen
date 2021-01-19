@@ -5,20 +5,20 @@ class FoodAdder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      FoodList: [],
+      foodList: []
     };
   }
-  
+
   handleSubmit = () => {
-    
+
   }
-  
+
   render() {
     return (
       <form className="food-adder">
-      <input type="text" placeholder="Добавьте продукты" />
-      <button className="food-adder__submit"></button>
-    </form>
+        <input type="text" placeholder="Добавьте продукты" />
+        <button className="food-adder__submit"></button>
+      </form>
     );
   }
 }

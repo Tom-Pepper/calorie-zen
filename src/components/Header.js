@@ -4,11 +4,11 @@ import './Header.css';
 
 function Header() {
   return (
-  	<div className="header">
-  	  <img className="header__logo" alt="Calorie-Zen Logo" src={headerLogo} />
+    <div className="header">
+      <img alt="Calorie Zen logo" className="header__logo" src={headerLogo} />
       <h1 className="header__header">Calorie-Zen</h1>
-    </div>  
+    </div>
   );
 }
-  
+
 export default Header;
