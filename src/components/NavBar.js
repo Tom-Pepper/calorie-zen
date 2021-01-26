@@ -1,12 +1,12 @@
 import React from 'react';
 import './NavBar.css';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   return (
     <nav className="menu">
-      <NavLink exact to="/" className="menu__item" activeClassName="menu__item_active">Домой</NavLink>
-      <NavLink to="/tips" className="menu__item" activeClassName="menu__item_active">Советы</NavLink>
+      <NavLink exact className="menu__item" activeClassName="menu__item_active" to="/">Домой</NavLink>
+      <NavLink className="menu__item" activeClassName="menu__item_active" to="/tips">Советы</NavLink>
     </nav>
   );
 }

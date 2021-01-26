@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Tips.css';
 
 function Tips() {
+  useEffect(() => {
+    fetch('https://api.nomoreparties.co/todays-tips-rus').then((res) => {
+      return res.json();
+    }).then((res) => {
+      setList(Object.values(res));  
+    })
+  }, []);
+  const [list, setList] = useState();
   return (
     <div className="tips">
-      <p>В скором времени пользователи смогут увидеть здесь подсказки!</p>
       <ul className="tips__list">
-        <li className="tips__item">подсказка 1</li>
-        <li className="tips__item">подсказка 2</li>
-        <li className="tips__item">подсказка 3</li>
+      {list &&  
+        /* используйте тут метод map для создания списка */
+      }
       </ul>
     </div>
   );
