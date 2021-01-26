@@ -14,7 +14,9 @@ function Tips() {
     <div className="tips">
       <ul className="tips__list">
       {list &&  
-        /* используйте тут метод map для создания списка */
+        list.map((item, i) => {
+          return (<li key={i} className="tips__item">{item.tip}</li>)
+        })
       }
       </ul>
     </div>
