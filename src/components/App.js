@@ -20,7 +20,7 @@ class App extends React.Component {
     <BrowserRouter>
       <Header />
       <main className="content">
-        <NavBar />
+        {this.state.loggedIn && <NavBar />}
         <Switch>
           <Route exact path="/diary">
             <Diary />
