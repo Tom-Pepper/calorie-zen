@@ -7,13 +7,14 @@ import Register from './Register';
 import Login from './Login';
 import NavBar from './NavBar';
 import './styles/App.css';
+import ProtectedRoute from "./ProtectedRoute";
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      loggedIn: false	
-    };
+      loggedIn: false
+    }
   }
   render(){
     return (
@@ -22,12 +23,8 @@ class App extends React.Component {
       <main className="content">
         {this.state.loggedIn && <NavBar />}
         <Switch>
-          <Route exact path="/diary">
-            <Diary />
-          </Route>
-          <Route path="/tips">
-            <Tips />
-          </Route>
+          <ProtectedRoute path="/diary" loggedIn={this.state.loggedIn} component={Diary} />
+          <ProtectedRoute path="/tips" loggedIn={this.state.loggedIn} component={Tips} />
           <Route path="/register">
             <Register />
           </Route>
@@ -35,7 +32,7 @@ class App extends React.Component {
             <Login />
           </Route>
           <Route exact path="/">
-            { this.state.loggedIn ? <Redirect to="/diary"/> : <Redirect to="/login" /> }
+            {this.state.loggedIn ? <Redirect to="/diary" /> : <Redirect to="/login" />}
           </Route>
         </Switch>
       </main>
