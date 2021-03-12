@@ -6,8 +6,8 @@ import Tips from './Tips';
 import Register from './Register';
 import Login from './Login';
 import NavBar from './NavBar';
+import ProtectedRoute from './ProtectedRoute';
 import './styles/App.css';
-import ProtectedRoute from "./ProtectedRoute";
 
 class App extends React.Component {
   constructor(props){
