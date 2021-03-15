@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import * as auth from '../auth.js';
+import { Link } from 'react-router-dom';
 import './styles/Register.css';
+import * as auth from '../auth.js';
 
 class Register extends React.Component {
   constructor(props) {
@@ -24,18 +24,8 @@ class Register extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.password === this.state.confirmPassword){
-      let { username, password, email } = this.state;
-      auth.register(this.state.username, this.state.password, this.state.email)
-      .then((res) => {
-        if (res) {
-          this.setState({
-            message: ''
-          }, () => {
-            this.props.history.push('/login');
-          })
-        }
-      });
+    if (this.state.password === this.state.confirmPassword) {
+      auth.register(username, password, email);
     }
   }
   render(){
@@ -79,4 +69,4 @@ class Register extends React.Component {
 
 }
 
-export default withRouter(Register);
+export default Register;

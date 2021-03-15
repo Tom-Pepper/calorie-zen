@@ -15,6 +15,14 @@ class App extends React.Component {
     this.state = {
       loggedIn: false
     }
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+  handleLogin(event) {
+    // здесь обрабатываем вход в систему
+    event.preventDefault();
+    this.setState({
+      loggedIn: true
+    });
   }
   render(){
     return (
@@ -29,7 +37,7 @@ class App extends React.Component {
             <Register />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login handleLogin={this.handleLogin} />
           </Route>
           <Route exact path="/">
             {this.state.loggedIn ? <Redirect to="/diary" /> : <Redirect to="/login" />}
