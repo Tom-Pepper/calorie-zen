@@ -1,72 +1,48 @@
 import React from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import Header from './Header';
-import Diary from './Diary';
-import Tips from './Tips';
-import Register from './Register';
-import Login from './Login';
-import NavBar from './NavBar';
-import ProtectedRoute from './ProtectedRoute';
-import * as auth from '../auth.js';
-import './styles/App.css';
+import FoodAdder from './FoodAdder';
+import './styles/Diary.css';
 
-class App extends React.Component {
-  constructor(props){
+class Diary extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false
-    }
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleTokenCheck = this.handleTokenCheck.bind(this);
+      foodList: [],
+      calorieTotal: 0
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentDidMount(){
-    // проверьте токен здесь
-    this.handleTokenCheck();
-  }
-  handleTokenCheck(){
-    const jwt = localStorage.getItem('jwt');
-    // проверим, есть ли jwt токен в локальном хранилище браузера
-    // если это так, возьмите этот токен и создайте переменную jwt
-    // вызовите метод auth.checkToken(), передающий этот токен
-    // внутри следующего then(), если там есть объект res,
-    // установите loggedIn значение true
-    // в колбэке this.setState перенаправьте пользователя в /diary
-    if (jwt) {
-      this.setState({
-        loggedIn: true
-      }), () => {
-        this.props.history.push('/diary');
-      }
-    }
-  }
-  handleLogin (){
+  handleSubmit = (food, calories) => {
+    let calorieTotal = 0;
+    var newList = this.state.foodList.slice();
+    newList.push({food, calories});
+    // получаем сумму калорий
+    newList.forEach((entry) => {
+      calorieTotal = calorieTotal + parseInt(entry.calories);
+    });
     this.setState({
-      loggedIn: true
-    })
+      foodList: newList,
+      calorieTotal
+    });
   }
   render(){
     return (
-      <>
-      <Header />
-      <main className="content">
-        {this.state.loggedIn && <NavBar />}
-        <Switch>
-          <ProtectedRoute path="/diary" loggedIn={this.state.loggedIn} component={Diary} />
-          <ProtectedRoute path="/tips" loggedIn={this.state.loggedIn} component={Tips} />
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/login">
-            <Login handleLogin={this.handleLogin} />
-          </Route>
-          <Route exact path="/">
-            {this.state.loggedIn ? <Redirect to="/diary" /> : <Redirect to="/login" />}
-          </Route>
-        </Switch>
-      </main>
-      </>
+      <div className="diary">
+        <div className="calories">
+          <h2>Цель на день: {this.props.calGoal}</h2>
+          <h2>Калории: {this.state.calorieTotal}</h2>
+          <ul className="calories__list">
+            {this.state.foodList.map((food, i) => {
+              return(
+                <li key={i} >{food.food} - {food.calories}</li>
+              )
+            })}
+          </ul>
+        </div>
+        <FoodAdder handleSubmit={this.handleSubmit} />
+      </div>
   );
   }
+
 }
 
-export default withRouter(App);
+export default Diary;
